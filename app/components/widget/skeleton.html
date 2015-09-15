@@ -1,0 +1,8 @@
+<section class="box" ng-class="'widget-'+widget.type">
+  <h1 class="box-title" ng-bind="widget.title || widget.name"></h1>
+  <div class="box-options">
+    <!--<button class="box-option-settings fa fa-cog"></button>-->
+  </div>
+  <div class="box-content" ng-include="widget.template">
+  </div>
+</section>

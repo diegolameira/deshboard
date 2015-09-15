@@ -1,0 +1,53 @@
+<blockquote>
+  {{quote.quote}}
+  <cite>{{quote.author}}</cite>
+</blockquote>
+<p class="copy">powered by <a href="https://theysaidso.com/">They said so</a></p>
+<style>
+  .widget-quote .copy {
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    font-size: 11px;
+    padding: .5em;
+    background-color: rgba(0,0,0,.5);
+    right: 0;
+  }
+
+  .widget-quote .copy a {
+    color: #fff;
+  }
+
+  blockquote {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    max-width: 500px;
+    display: block;
+    margin: 0;
+    padding: 30px;
+    font-size: 1.6em;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  blockquote:before {
+    position: absolute;
+    color: rgba(0,0,0,.1);
+    content: open-quote;
+    font-size: 10em;
+    line-height: 1;
+    top: -2rem;
+    left: -1rem;
+  }
+
+  blockquote cite
+  {
+    display: block;
+    text-align: right;
+    margin-top: 10px;
+    font-size: 1rem;
+  }
+</style>

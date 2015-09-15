@@ -1,0 +1,27 @@
+<div class="clock-centered">
+  <h2 class="clock-time regular light">{{time}}</h2>
+  <p class="clock-day">{{day}}</p>
+  <style>
+    widget[type='clock'] .box-content
+    {
+      text-align: center;
+    }
+    .clock-time
+    {
+      font-size: 3em;
+      margin: 0;
+    }
+    .clock-day
+    {
+      margin: 0;
+    }
+    .clock-centered
+    {
+      height: 100%;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</div>

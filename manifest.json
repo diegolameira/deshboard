@@ -1,0 +1,48 @@
+{
+  "name": "Deshboard",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "A dashboard full of tools for help developers to get a grateful work day, or night =).",
+  "icons": {
+    "16": "dist/images/icon-16.png",
+    "128": "dist/images/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "dist/images/icon-19.png",
+      "38": "dist/images/icon-38.png"
+    },
+    "default_title": "Deshboard",
+    "default_popup": "dist/components/chrome/popup.html"
+  },
+  "options_page": "dist/components/chrome/options.html",
+  "options_ui": {
+    "page": "dist/components/chrome/options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "dist/scripts/main.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": "default-src 'unsafe-eval' 'self'; connect-src http://www.bing.com/; font-src 'self' https://fonts.gstatic.com/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'unsafe-eval' 'self' https://*.googleapis.com/; img-src http://www.bing.com",
+  "chrome_url_overrides": {
+    "newtab": "dist/index.html"
+  },
+  "permissions": [
+    "tabs",
+    "history",
+    "http://*/*",
+    "https://*/*",
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ]
+}

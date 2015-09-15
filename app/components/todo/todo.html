@@ -1,0 +1,39 @@
+<form ng-submit="add(todo)">
+<input  class="todo-input"
+        type="text" placeholder="what needs to be done?"
+        ng-model="todo"
+         />
+<ol class="todo-list">
+  <li class="todo-list-item"
+      ng-repeat="todo in $storage.todo | orderBy:'created':true"
+      ng-class="{completed: todo.completed}">
+    <input type="checkbox" class="toggle" ng-model="todo.completed" /> {{todo.title}}
+  </li>
+</ol>
+</form>
+<style>
+
+  .widget-todo
+  {
+    color: rgba(150, 50, 0, .8);
+  }
+
+  .widget-todo input[type=text]:focus {
+    color: rgba(150, 50, 0, 1);
+    border-bottom-color: rgba(150, 50, 0, 1);
+  }
+
+  .todo-list
+  {
+    margin: 10px;
+    padding: 0;
+    display: block;
+    list-style: none;
+  }
+
+  .widget-todo .todo-list-item.completed
+  {
+    text-decoration: line-through;
+  }
+
+</style>
