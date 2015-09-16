@@ -74,14 +74,9 @@ gulp.task('images', () => {
 gulp.task('fonts', () => {
   return gulp.src(require('main-bower-files')({
     filter: '**/*.{eot,svg,ttf,woff,woff2}'
-  }).concat('app/fonts/**/*'))
+  }).concat(['app/fonts/**/*', 'bower_components/font-awesome/fonts/**/*.{eot,svg,ttf,woff,woff2}']))
     .pipe(gulp.dest('.tmp/fonts'))
     .pipe(gulp.dest('dist/fonts'));
-});
-
-gulp.task('icons', function() {
-  return gulp.src('bower_components/fontawesome/fonts/**.*')
-    .pipe(gulp.dest('./public/fonts'));
 });
 
 gulp.task('extras', () => {
