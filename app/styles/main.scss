@@ -97,7 +97,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 10px;
 }
 
-.box-options .box-option-settings:hover::before {
+.on-hover-spin:hover::before {
   -webkit-animation: fa-spin 2s infinite linear;
   animation: fa-spin 2s infinite linear;
 }

@@ -19,6 +19,7 @@
       this.title = config.title;
       this.template = config.template;
       this.controller = config.controller;
+      this.settings = config.settings;
 
     };
 
@@ -47,6 +48,8 @@
       scope: {},
       replace: true,
       templateUrl: 'components/widget/skeleton.html',
+      controller: controller,
+      controllerAs: 'Widget',
       link: link
     };
 
@@ -55,6 +58,22 @@
       var widget = $scope.widget = _.findWhere(Widgets, {type: normalize(iAttrs.type)});
       if (widget && widget.controller)
         $controller(widget.controller, {$scope: $scope});
+
+      $scope.isSettingOpen = false;
+    }
+
+    function controller()
+    {
+
+      this.openSettings = openSettings;
+
+      ////////////////////////////////
+
+      function openSettings()
+      {
+        console.log('foi');
+      }
+
     }
   }
 
