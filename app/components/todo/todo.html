@@ -1,16 +1,17 @@
-<form ng-submit="add(todo)">
-<input  class="todo-input"
-        type="text" placeholder="what needs to be done?"
-        ng-model="todo"
-         />
+<form ng-submit="add(temp.input)">
+  <input  class="todo-input"
+          type="text" placeholder="what needs to be done?"
+          ng-model="temp.input"
+           />
+</form>
 <ol class="todo-list">
   <li class="todo-list-item"
       ng-repeat="todo in $storage.todo | orderBy:'created':true"
       ng-class="{completed: todo.completed}">
     <input type="checkbox" class="toggle" ng-model="todo.completed" /> {{todo.title}}
+    <span class="fa fa-times remove" ng-click="remove(todo)"></span>
   </li>
 </ol>
-</form>
 <style>
 
   .widget-todo
@@ -34,6 +35,16 @@
   .widget-todo .todo-list-item.completed
   {
     text-decoration: line-through;
+  }
+
+  .todo-list-item .remove
+  {
+    opacity: .2;
+  }
+
+  .todo-list-item:hover .remove
+  {
+    opacity: 1;
   }
 
 </style>

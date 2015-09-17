@@ -4,6 +4,7 @@
   "dependencies": {
     "angular": "~1.4.5",
     "angular-carousel": "~0.3.13",
+    "angular-nicescroll": "~0.0.5",
     "angular-sortable-view": "~0.0.13",
     "font-awesome": "fontawesome#~4.4.0",
     "jquery": "~2.1.1",

@@ -20,6 +20,7 @@
       this.template = config.template;
       this.controller = config.controller;
       this.settings = config.settings;
+      this.nav = config.nav;
 
     };
 
@@ -60,11 +61,17 @@
         $controller(widget.controller, {$scope: $scope});
 
       $scope.isSettingOpen = false;
+      $scope.niceOptions = {
+        cursorborder:'none',
+        cursorcolor: 'rgba(255,255,255,1)',
+        cursorborderradius: '0'
+      };
     }
 
     function controller($scope)
     {
 
+      this.action = action;
       this.toggleSettings = toggleSettings;
 
       ////////////////////////////////
@@ -72,6 +79,11 @@
       function toggleSettings()
       {
         $scope.isSettingOpen = !$scope.isSettingOpen;
+      }
+
+      function action(action)
+      {
+        $scope[action]();
       }
 
     }

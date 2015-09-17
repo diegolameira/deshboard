@@ -3,17 +3,21 @@
   <nav class="box-options">
     <button class="box-option fa fa-{{option.ico}}"
             ng-repeat="option in widget.nav.options"
-            ng-click="option.action"
+            ng-click="Widget.action(option.action)"
+            title="{{option.label}}"
             ></button>
     <button class="box-option box-option-settings fa"
             ng-if="widget.settings"
+            title="Settings"
             ng-class="{'on-hover-spin fa-cog':!isSettingOpen,'open-settings fa-times':isSettingOpen}"
             ng-click="Widget.toggleSettings()"></button>
   </nav>
-  <div class="box-content" ng-include="widget.template">
+  <div ng-nicescroll nice-option="niceOptions" class="box-content"
+       ng-include="widget.template">
   </div>
   <div class="box-settings" ng-if="widget.settings" ng-class="{'open': isSettingOpen}">
     <h2 class="box-title">Settings</h2>
-    <div ng-include="widget.settings"></div>
+    <div ng-nicescroll nice-option="niceOptions"
+         ng-include="widget.settings"></div>
   </div>
 </section>

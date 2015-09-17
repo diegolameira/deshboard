@@ -40,7 +40,7 @@
 }
 
 .box-content {
-  overflow: hidden;
+  /* overflow: hidden; */
   position: absolute;
   top: calc(1em + 20px);
   bottom: 0;
