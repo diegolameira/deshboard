@@ -1,19 +1,11 @@
 {
   "name": "Deshboard",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "manifest_version": 2,
   "description": "A dashboard full of tools for help developers to get a grateful work day, or night =).",
   "icons": {
     "16": "app/images/icon-16.png",
     "128": "app/images/icon-128.png"
-  },
-  "browser_action": {
-    "default_icon": {
-      "19": "app/images/icon-19.png",
-      "38": "app/images/icon-38.png"
-    },
-    "default_title": "Deshboard",
-    "default_popup": "app/components/chrome/popup.html"
   },
   "options_page": "app/components/chrome/options.html",
   "options_ui": {

@@ -1,24 +1,51 @@
 <!doctype html>
-<html>
-  <head>
-    <!-- build:css styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css styles/main.css -->
-    <link href="styles/main.css" rel="stylesheet">
-    <!-- endbuild -->
-  </head>
-  <body>
-    <h1>'Allo, 'Allo!</h1>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Options</title>
+</head>
+<body>
 
-    <!-- build:js scripts/vendor.js -->
-    <!-- bower:js -->
-    <!-- endbower -->
-    <!-- endbuild -->
+  <h1>Options</h1>
 
-    <!-- build:js scripts/options.js -->
-    <script src="scripts/options.js"></script>
-    <!-- endbuild -->
-  </body>
+
+  <h2>Export</h2>
+  <button id="export" onclick="exportFile()">Export all data</button>
+
+  <h2>Import</h2>
+  <input type="file" id="import" />
+  <hr/>
+  <h2>Reset</h2>
+  <button onclick="localStorage.clear();">Reset all data</button>
+
+  <script>
+    window.exportFile = function(){
+      console.log(url)
+      var json = JSON.stringify(localStorage);
+      var blob = new Blob([json], {type: "application/json"});
+      var url = URL.createObjectURL(blob);
+    };
+    function importJSON(storage){
+      for (var name in storage) { localStorage.setItem(name, storage[name] ); }
+    }
+
+    function readSingleFile(evt) {
+      //Retrieve the first (and only!) File from the FileList object
+      var f = evt.target.files[0];
+
+      if (f) {
+        var r = new FileReader();
+        r.onload = function(e) {
+          var contents = e.target.result;
+          importJSON(contents);
+        }
+        r.readAsText(f);
+      } else {
+        alert("Failed to load file");
+      }
+    }
+
+    document.getElementById('import').addEventListener('change', readSingleFile, false);
+  </script>
+</body>
 </html>

@@ -162,8 +162,7 @@ gulp.task('manifest', () => {
     .pipe($.jsonEditor(function(json){
 
       var string = JSON.stringify(json);
-      string.replace(new RegExp('app/', 'g'), '');
-      json = JSON.parse(string);
+      json = JSON.parse(string.replace(new RegExp('app/', 'g'), ''));
 
       return json;
     }))
