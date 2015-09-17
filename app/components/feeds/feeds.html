@@ -1,5 +1,7 @@
 <div>
-
+  <div class="empty-warn" ng-if="!feeds.length">
+    Start reading some content into feeds settings
+  </div>
   <carousel collection="feeds">
 
     <div ng-repeat="feed in feeds" class="carousel-item">

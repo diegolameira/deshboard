@@ -1,0 +1,5 @@
+<div class="source" ng-repeat="feed in $storage.feeds track by $index">
+  <input type="text"ng-model="feed" placeholder="Place a RSS feed url here" />
+  <button ng-click="removeSource($index)" class="remove fa fa-times"></button>
+</div>
+<button  ng-click="addSource()" class="button-addsource fa fa-plus">Add source</button>

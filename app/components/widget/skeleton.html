@@ -12,12 +12,20 @@
             ng-class="{'on-hover-spin fa-cog':!isSettingOpen,'open-settings fa-times':isSettingOpen}"
             ng-click="Widget.toggleSettings()"></button>
   </nav>
-  <div ng-nicescroll nice-option="niceOptions" class="box-content"
+  <div ng-nicescroll nice-option="{
+        cursorborder:'none',
+        cursorcolor: 'rgba(255,255,255,1)',
+        cursorborderradius: '0'
+      }" class="box-content"
        ng-include="widget.template">
   </div>
-  <div class="box-settings" ng-if="widget.settings" ng-class="{'open': isSettingOpen}">
+  <div  class="box-settings"
+        ng-class="{'open': isSettingOpen}">
     <h2 class="box-title">Settings</h2>
-    <div ng-nicescroll nice-option="niceOptions"
-         ng-include="widget.settings"></div>
+    <div ng-nicescroll nice-option="{
+        cursorborder:'none',
+        cursorcolor: 'rgba(255,255,255,1)',
+        cursorborderradius: '0'
+      }" ng-include="widget.settings"></div>
   </div>
 </section>

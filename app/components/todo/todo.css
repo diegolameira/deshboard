@@ -1,0 +1,48 @@
+
+.widget-todo
+{
+  color: rgba(150, 50, 0, .8);
+}
+
+.widget-todo input[type=text]:focus {
+  color: rgba(150, 50, 0, 1);
+  border-bottom-color: rgba(150, 50, 0, 1);
+}
+
+.todo-list
+{
+  margin: 10px;
+  padding: 0;
+  display: block;
+  list-style: none;
+}
+
+.widget-todo .todo-list-item.completed
+{
+  text-decoration: line-through;
+}
+
+.todo-list-item .remove
+{
+  opacity: .2;
+}
+
+.todo-list-item:hover .remove
+{
+  opacity: 1;
+}
+
+
+.widget-feeds .box-settings .source {
+  position: relative;
+}
+
+.widget-feeds .box-settings .remove {
+  background: 0;
+  border: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -33px;
+  width: 33px;
+}

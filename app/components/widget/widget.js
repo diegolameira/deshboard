@@ -61,11 +61,6 @@
         $controller(widget.controller, {$scope: $scope});
 
       $scope.isSettingOpen = false;
-      $scope.niceOptions = {
-        cursorborder:'none',
-        cursorcolor: 'rgba(255,255,255,1)',
-        cursorborderradius: '0'
-      };
     }
 
     function controller($scope)

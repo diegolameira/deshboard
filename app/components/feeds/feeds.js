@@ -13,7 +13,8 @@
     WidgetsProvider.register('feeds', {
       title: 'Feeds',
       template: 'components/feeds/feeds.html',
-      controller: 'FeedsController'
+      controller: 'FeedsController',
+      settings: 'components/feeds/settings.html'
     });
 
   }
@@ -36,7 +37,12 @@
 
     $scope.feeds = [];
 
+    $scope.addSource = addSource;
+    $scope.removeSource = removeSource;
+
     $scope.$watchCollection('$storage', init);
+
+    ////////////////////////////////
 
     function init(storage)
     {
@@ -46,10 +52,23 @@
 
     function getFeed(url, key, collection)
     {
+      if (_.isEmpty(url))
+        return false;
       var baseUrl = 'https://ajax.googleapis.com/ajax/services/feed/load?callback=JSON_CALLBACK&v=2.0&q=';
       $http.jsonp(baseUrl + url).then(function(response){
         collection[key] = response.data.responseData.feed;
       });
+    }
+
+    function addSource()
+    {
+      $scope.$storage.feeds.push('');
+    }
+
+    function removeSource(index)
+    {
+      if (~index)
+        $scope.$storage.feeds.splice(index, 1);
     }
 
   }

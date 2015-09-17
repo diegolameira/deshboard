@@ -4,6 +4,9 @@
           ng-model="temp.input"
            />
 </form>
+<div class="empty-warn" ng-if="!$storage.todo.length">
+  Nothing better than zero items, this is awesome =P
+</div>
 <ol class="todo-list">
   <li class="todo-list-item"
       ng-repeat="todo in $storage.todo | orderBy:'created':true"
@@ -12,39 +15,3 @@
     <span class="fa fa-times remove" ng-click="remove(todo)"></span>
   </li>
 </ol>
-<style>
-
-  .widget-todo
-  {
-    color: rgba(150, 50, 0, .8);
-  }
-
-  .widget-todo input[type=text]:focus {
-    color: rgba(150, 50, 0, 1);
-    border-bottom-color: rgba(150, 50, 0, 1);
-  }
-
-  .todo-list
-  {
-    margin: 10px;
-    padding: 0;
-    display: block;
-    list-style: none;
-  }
-
-  .widget-todo .todo-list-item.completed
-  {
-    text-decoration: line-through;
-  }
-
-  .todo-list-item .remove
-  {
-    opacity: .2;
-  }
-
-  .todo-list-item:hover .remove
-  {
-    opacity: 1;
-  }
-
-</style>

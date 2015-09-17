@@ -49,7 +49,14 @@
 
 .box-settings {
   position: absolute;
-  background: #222;
+  background: rgba(0,0,0,.5);
+  background: -moz-linear-gradient(top,  rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.9)), color-stop(100%,rgba(0,0,0,0.6)));
+  background: -webkit-linear-gradient(top,  rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.6) 100%);
+  background: -o-linear-gradient(top,  rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.6) 100%);
+  background: -ms-linear-gradient(top,  rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.6) 100%);
+  background: linear-gradient(to bottom,  rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.6) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6000000', endColorstr='#99000000',GradientType=0 );
   color: #eee;
   top: 0;
   bottom: 0;
@@ -58,6 +65,9 @@
   transform: translate3d(0,-100%,0);
   transition: .3s ease-in-out transform;
   padding: 10px;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1010;
 }
 
 .box-settings.open {
@@ -70,5 +80,29 @@
 
 .box-settings > h2 {
   padding: 0;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  position: absolute;
+  top: 0;
+}
+
+.box-settings > [ng-nicescroll]
+{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 40px;
+  padding-right: 33px;
+}
+
+.empty-warn {
+  margin: 10px;
+  padding: 20px;
+  background-color: rgba(255,255,255,.13);
+  color: rgba(255,255,255,.9);
+  /* font-size: 1.2em; */
+  /* font-weight: bolder; */
+  /* line-height: 1.5; */
+  letter-spacing: 2px;
+  font-family: monospace;
 }
