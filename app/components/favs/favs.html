@@ -1,0 +1,93 @@
+<div>
+  <div class="empty-warn" ng-if="!favorites.length">
+    Who need a place to keep urls? You're a mindful dude! =)
+    <button class="button-wired button-block" ng-click="addSource();Widget.toggleSettings()">Add a favorite</button>
+  </div>
+  <carousel collection="favorites">
+
+    <ul ng-repeat="favorite in favorites track by $index" class="favorites-items">
+      <li class="favorites-item">
+        <a ng-href="{{favorite.link}}" ng-bind-html="favorite.title"></a>
+      </li>
+    </ul>
+
+  </carousel>
+
+  <style>
+
+    carousel {
+      margin-bottom: 0;
+      min-height: 100%;
+    }
+
+    .carousel-item {
+      padding: 0 40px;
+    }
+
+    .slick-dots {
+      bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .widget-favorites a {
+      font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: lighter;
+      font-size: 1em;
+      line-height: 1em;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .favorite-title,
+    .favorite-item-title {
+      font-size: 1em;
+      margin: 0;
+    }
+
+    .favorite-title {
+      text-align: right;
+    }
+
+    .favorite-title a {
+      color: rgba(0, 0, 0, .4);
+    }
+
+    .favorite-item-title {
+      padding: 4px 0;
+      border-top: 1px solid rgba(0, 0, 0, .2);
+    }
+
+    .favorite-items {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .widget-favorites .box-settings .source {
+      position: relative;
+    }
+
+    .source-item input {
+      max-width: -webkit-calc(100% - 36px);
+    }
+
+    .button-addsource {
+      background: 0;
+      border: 0;
+      width: 100%;
+      line-height: 2em;
+    }
+
+    .widget-favorites .box-settings .source button {
+      background: 0;
+      border: 0;
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 33px;
+      right: -33px;
+    }
+
+  </style>
+
+</div>
