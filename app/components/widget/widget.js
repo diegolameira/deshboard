@@ -62,16 +62,16 @@
       $scope.isSettingOpen = false;
     }
 
-    function controller()
+    function controller($scope)
     {
 
-      this.openSettings = openSettings;
+      this.toggleSettings = toggleSettings;
 
       ////////////////////////////////
 
-      function openSettings()
+      function toggleSettings()
       {
-        console.log('foi');
+        $scope.isSettingOpen = !$scope.isSettingOpen;
       }
 
     }

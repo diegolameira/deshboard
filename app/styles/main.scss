@@ -1,5 +1,5 @@
 // bower:scss
-@import "/bower_components/font-awesome/scss/font-awesome.scss";
+@import "./bower_components/font-awesome/scss/font-awesome.scss";
 // endbower
 
 * {
@@ -62,52 +62,9 @@ h1, h2, h3, h4, h5, h6 {
   background: #000;
 }
 
-.box {
-  width: 50%;
-  background-color: #666;
-  color: #eee;
-  position: relative;
-  border: 4px solid transparent;
-}
-
-.box:hover {
-  border-color: #fff;
-}
-
-.box-title {
-  font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: lighter;
-  font-size: 1em;
-  line-height: 1em;
-  margin: 0;
-  padding: 10px;
-}
-
-.box-options {
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-
-.box-options button {
-  background: 0;
-  border: 0;
-  margin: 0;
-  line-height: 1em;
-  padding: 10px;
-}
-
 .on-hover-spin:hover::before {
   -webkit-animation: fa-spin 2s infinite linear;
   animation: fa-spin 2s infinite linear;
-}
-
-.box-content {
-  overflow: hidden;
-  position: absolute;
-  top: calc(1em + 20px);
-  bottom: 0;
-  width: 100%;
 }
 
 .turquoise {
