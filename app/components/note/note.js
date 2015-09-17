@@ -4,6 +4,7 @@
   angular.module('widgets')
     .config(Config)
     .controller('NoteController', Controller)
+    .directive('contenteditable', ContentEditableDirective)
 
   ;////////////////////////
 
@@ -25,6 +26,36 @@
       note: ''
     });
 
+  }
+
+  function ContentEditableDirective(){
+    return {
+      require: 'ngModel',
+      link: function(scope, element, attrs, ctrl) {
+
+        var delay = _.clone(scope.$eval(attrs.ngModelOptions)).debounce.default;
+        var debounced = _.debounce(function(){
+          ctrl.$setViewValue(element.html());
+        }, delay || 200);
+
+        // view -> model
+        element.bind('blur', function() {
+          scope.$apply(debounced);
+        });
+
+        element.bind('keyup', function(){
+          scope.$apply(debounced);
+        });
+
+        // model -> view
+        ctrl.$render = function() {
+          element.html(ctrl.$viewValue);
+        };
+
+        ctrl.$render();
+
+      }
+    };
   }
 
 })();
