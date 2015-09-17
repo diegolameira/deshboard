@@ -156,7 +156,21 @@ gulp.task('wiredep', () => {
     .pipe(gulp.dest('app'));
 });
 
-gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
+// manifest replace
+gulp.task('manifest', () => {
+  gulp.src('./manifest.json')
+    .pipe($.jsonEditor(function(json){
+
+      var string = JSON.stringify(json);
+      string.replace(new RegExp('app/', 'g'), '');
+      json = JSON.parse(string);
+
+      return json;
+    }))
+    .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras', 'manifest'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
