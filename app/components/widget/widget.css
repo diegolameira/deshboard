@@ -108,3 +108,17 @@
   letter-spacing: 2px;
   font-family: monospace;
 }
+
+.button-wired {
+  border: 1px solid rgba(255,255,255,.8);
+  color: rgba(255,255,255,.7);
+  border-radius: 3px;
+  background: 0;
+  text-transform: uppercase;
+}
+
+.button-block {
+  width: 100%;
+  display: block;
+  margin: 10px;
+}

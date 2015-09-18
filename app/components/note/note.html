@@ -1,6 +1,8 @@
-<textarea class="note"
-          ng-model="$storage.note"
-          ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }"></textarea>
+<p class="note"
+   contenteditable="true"
+   ng-model="$storage.note"
+   ng-model-options="{updateOn: 'default blur', debounce: { default: 500, blur: 0 } }"
+   ></p>
 <style>
   .note
   {
