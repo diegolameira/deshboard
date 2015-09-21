@@ -7,11 +7,46 @@
 <div class="empty-warn" ng-if="!$storage.todo.length">
   Nothing better than zero items, this is awesome =P
 </div>
-<ol class="todo-list">
-  <li class="todo-list-item"
-      ng-repeat="todo in $storage.todo | orderBy:'created':true"
-      ng-class="{completed: todo.completed}">
-    <input type="checkbox" class="toggle" ng-model="todo.completed" /> {{todo.title}}
-    <span class="fa fa-times remove" ng-click="remove(todo)"></span>
-  </li>
-</ol>
+
+<!-- Nested node template -->
+<script type="text/ng-template" id="nodes_renderer.html">
+  <div ui-tree-handle class="tree-node tree-node-content" ng-class="{completed: node.completed}">
+
+    <div class="todo-controls-left">
+      <input type="checkbox" ng-model="node.completed" ng-change="checkChildren(node)" />
+      <span ng-if="node.nodes && node.nodes.length > 0" data-nodrag
+            ng-click="toggle(this)"
+            class="fa todo-button"
+            ng-class="{
+                'fa-chevron-right todo-expand': collapsed,
+                'fa-chevron-down todo-collapse': !collapsed
+              }"></span>
+    </div>
+
+
+    <p
+      class="todo-title"
+      data-nodrag
+      ng-click="startEditing(node)"
+      ng-blur="stopEditing()"
+      contenteditable="{{node == editing}}"
+      ng-model="node.title"
+      ng-class="{editing: node == editing, 'no-collapse': !(node.nodes && node.nodes.length > 0)}"
+      ></p>
+
+    <div class="todo-controls-right">
+      <span data-nodrag ng-click="newSubItem(this);" class="fa todo-button fa-plus"></span>
+      <span data-nodrag ng-click="remove(this)" class="fa todo-button fa-times"></span>
+    </div>
+  </div>
+  <ol ui-tree-nodes=""
+      ng-model="node.nodes" ng-show="!collapsed">
+    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+    </li>
+  </ol>
+</script>
+<div ui-tree>
+  <ol ui-tree-nodes="" ng-model="$storage.todo" id="tree-root">
+    <li ng-repeat="node in $storage.todo" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+  </ol>
+</div>

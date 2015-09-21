@@ -33,10 +33,11 @@
       require: 'ngModel',
       link: function(scope, element, attrs, ctrl) {
 
-        var delay = _.clone(scope.$eval(attrs.ngModelOptions)).debounce.default;
+        var options = _.clone(scope.$eval(attrs.ngModelOptions));
+        var delay = _.has(options, 'debounce') ? options.debounce.default : 200;
         var debounced = _.debounce(function(){
           ctrl.$setViewValue(element.html());
-        }, delay || 200);
+        }, delay);
 
         // view -> model
         element.bind('blur', function() {

@@ -5,6 +5,7 @@
             ng-repeat="option in widget.nav.options"
             ng-click="Widget.action(option.action)"
             title="{{option.label}}"
+            ng-hide="{{option.hide}}"
             ></button>
     <button class="box-option box-option-settings fa"
             ng-if="widget.settings"
