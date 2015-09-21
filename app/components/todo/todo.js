@@ -116,10 +116,6 @@
       todo: []
     });
 
-    $scope.$storage.todo.map(function(todo){
-      return new TodoFactory(todo);
-    });
-
     var history = $scope.history = new TodoHistory($scope.$storage, 'todo');
 
     $scope.editing = null;
@@ -148,7 +144,12 @@
       history.save();
       scope.expand();
       var nodeData = scope.$modelValue;
-      var newNode = new TodoFactory(nodeData.title + '.' + (nodeData.nodes.length + 1));
+
+      // Legacy
+      if ( !nodeData.nodes )
+        nodeData.nodes = [];
+
+      var newNode = new TodoFactory(nodeData.title + '.' + (nodeData.nodes.length + 1) );
       nodeData.nodes.push(newNode);
       startEditing(newNode);
     };
