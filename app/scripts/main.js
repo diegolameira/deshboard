@@ -2,7 +2,7 @@
 (function(global, angular){
   'use strict';
 
-  angular.module('app', ['ui', 'widgets', 'ngStorage', 'angular-nicescroll', 'ui.tree'])
+  angular.module('app', ['ui', 'widgets', 'auth', 'ngStorage', 'angular-nicescroll', 'ui.tree'])
     .config(Config)
     .run(Run)
     .constant('moment', global.moment)

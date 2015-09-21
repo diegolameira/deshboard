@@ -7,6 +7,7 @@
     "angular-nicescroll": "~0.0.5",
     "angular-sortable-view": "~0.0.13",
     "angular-ui-tree": "~2.9.0",
+    "angularfire": "~1.1.2",
     "font-awesome": "fontawesome#~4.4.0",
     "jquery": "~2.1.1",
     "Keypress": "~2.1.3",
