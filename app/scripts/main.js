@@ -13,15 +13,14 @@
 
   function Config($sceProvider)
   {
-
     $sceProvider.enabled(false);
 
   }
 
-  function Run($rootScope, Keypress, Sync, $localStorage, _)
+  function Run($rootScope, Keypress, Sync, $localStorage, $localStorageDefaults, _)
   {
 
-    $rootScope.$storage = $localStorage;
+    $rootScope.$storage = $localStorage.$default($localStorageDefaults);
 
     Sync.remote
       .fetch();

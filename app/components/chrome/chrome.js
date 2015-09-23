@@ -38,7 +38,7 @@
               obj[data] = localStorage.getItem(STORAGEKEY+data);
             });
           }
-          else if (_.isString() )
+          else if ( _.isString(data) )
           {
             obj[data] = localStorage.getItem(STORAGEKEY+data);
           }
@@ -87,7 +87,7 @@
             toast.dismiss();
           toast = UI.toast(syncIcon + ' syncing...');
           var lastSync = {
-            local: localStorage.getItem('lastSync')
+            local: eval(localStorage.getItem('lastSync'))
           };
 
           chrome.storage[s].get(null, function(data){
@@ -144,6 +144,7 @@
 
         var storageChange = changes[key];
 
+        /*
         console.log('Storage key "%s" in namespace "%s" changed. ' +
           'Old value was "%s", new value is "%s".',
           key,
@@ -151,8 +152,10 @@
           storageChange.oldValue,
           storageChange.newValue);
 
+        // TODO:
         //UI.toast('<i class="fa fa-check"></i> Data synced');
         //localStorage.setItem(STORAGEKEY+key, storageChange.newValue);
+        //*/
       }
     });
 

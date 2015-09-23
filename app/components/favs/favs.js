@@ -7,8 +7,13 @@
 
   ;////////////////////////
 
-  function Config(WidgetsProvider)
+  function Config(WidgetsProvider, $localStorageDefaultsProvider)
   {
+
+    $localStorageDefaultsProvider.set('favorites', [{
+      title: 'Google',
+      link: 'http://google.com'
+    }]);
 
     WidgetsProvider.register('favorites', {
       title: 'Favorites',
@@ -19,24 +24,15 @@
 
   }
 
-  function Controller($scope, _, $localStorage)
+  function Controller($scope, $rootScope, _)
   {
-
-    var defaults = [{
-      title: 'Google',
-      link: 'http://google.com'
-    }];
-
-    $scope.$storage = $localStorage.$default({
-      favorites: defaults
-    });
 
     $scope.favorites = [];
 
     $scope.addSource = addSource;
     $scope.removeSource = removeSource;
 
-    $scope.$watchCollection('$storage', init);
+    $rootScope.$watchCollection('$storage', init);
 
     ////////////////////////////////
 

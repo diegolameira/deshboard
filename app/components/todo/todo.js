@@ -78,8 +78,10 @@
 
   }
 
-  function Config(WidgetsProvider)
+  function Config(WidgetsProvider, $localStorageDefaultsProvider)
   {
+
+    $localStorageDefaultsProvider.set('todo', []);
 
     WidgetsProvider.register('todo', {
       title: 'Todo',
@@ -105,16 +107,12 @@
 
   }
 
-  function Controller($scope, $localStorage, TodoFactory, TodoHistory)
+  function Controller($scope, TodoFactory, TodoHistory)
   {
 
     $scope.temp = {
       input: ''
     };
-
-    $scope.$storage = $localStorage.$default({
-      todo: []
-    });
 
     var history = $scope.history = new TodoHistory($scope.$storage, 'todo');
 

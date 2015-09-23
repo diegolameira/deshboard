@@ -3,6 +3,7 @@
 
   angular.module('widgets', [])
     .provider('Widgets', Provider)
+    .provider('$localStorageDefaults', $localStorageDefaults)
     .directive('widget', Skeleton)
 
   ;////////////////////////////
@@ -43,7 +44,7 @@
 
   }
 
-  function Skeleton($controller, Widgets)
+  function Skeleton($controller, $rootScope, Widgets)
   {
     return {
       scope: {},
@@ -61,6 +62,7 @@
         $controller(widget.controller, {$scope: $scope});
 
       $scope.isSettingOpen = false;
+      $scope.$storage = $rootScope.$storage;
     }
 
     function controller($scope)
@@ -82,6 +84,24 @@
       }
 
     }
+  }
+
+  function $localStorageDefaults()
+  {
+    var defaults = {};
+
+    return {
+      set: set,
+      $get: function(){
+        return defaults;
+      }
+    };
+
+    function set(key, value)
+    {
+      defaults[key] = value;
+    }
+
   }
 
   function normalize(string)

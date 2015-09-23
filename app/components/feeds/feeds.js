@@ -7,8 +7,17 @@
 
   ;////////////////////////
 
-  function Config(WidgetsProvider)
+  function Config(WidgetsProvider, $localStorageDefaultsProvider)
   {
+
+    $localStorageDefaultsProvider.set('feeds', [
+      'http://alistapart.com/site/rss',
+      'http://www.smashingmagazine.com/feed/',
+      'http://g1.globo.com/dynamo/mundo/rss2.xml',
+      'http://g1.globo.com/dynamo/economia/rss2.xml',
+      'http://g1.globo.com/dynamo/tecnologia/rss2.xml',
+      'http://g1.globo.com/dynamo/rio-de-janeiro/rss2.xml'
+    ]);
 
     WidgetsProvider.register('feeds', {
       title: 'Feeds',
@@ -19,28 +28,15 @@
 
   }
 
-  function Controller($scope, _, $http, $localStorage)
+  function Controller($scope, $rootScope, _, $http)
   {
-
-    var defaults = [
-      'http://alistapart.com/site/rss',
-      'http://www.smashingmagazine.com/feed/',
-      'http://g1.globo.com/dynamo/mundo/rss2.xml',
-      'http://g1.globo.com/dynamo/economia/rss2.xml',
-      'http://g1.globo.com/dynamo/tecnologia/rss2.xml',
-      'http://g1.globo.com/dynamo/rio-de-janeiro/rss2.xml'
-    ];
-
-    $scope.$storage = $localStorage.$default({
-      feeds: defaults
-    });
 
     $scope.feeds = [];
 
     $scope.addSource = addSource;
     $scope.removeSource = removeSource;
 
-    $scope.$watchCollection('$storage', init);
+    $rootScope.$watchCollection('$storage', init);
 
     ////////////////////////////////
 

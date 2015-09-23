@@ -8,8 +8,10 @@
 
   ;////////////////////////
 
-  function Config(WidgetsProvider)
+  function Config(WidgetsProvider, $localStorageDefaultsProvider)
   {
+
+    $localStorageDefaultsProvider.set('note', '');
 
     WidgetsProvider.register('note', {
       title: 'Note',
@@ -19,12 +21,8 @@
 
   }
 
-  function Controller($scope, $localStorage)
+  function Controller($scope)
   {
-
-    $scope.$storage = $localStorage.$default({
-      note: ''
-    });
 
   }
 
