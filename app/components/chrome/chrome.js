@@ -98,12 +98,14 @@
 
             //  Sync Logic
 
-            if ( lastSync.local < lastSync.remote ){
+            if ( !lastSync.local && lastSync.remote || lastSync.local < lastSync.remote )
+            {
               _.each(_.omit(data, 'lastSync'), ReplaceLocal);
               localStorage.setItem('lastSync', data.lastSync);
               UI.toast('<i class="fa fa-check"></i> Data synced');
-            } else
+            } else {
               ReplaceRemote();
+            }
 
             function ReplaceLocal(data, key)
             {
