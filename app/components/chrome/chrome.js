@@ -10,6 +10,17 @@
 
   var STORAGEKEY = 'ngStorage-';
 
+  var storage = {
+    set: function(key, value)
+    {
+      localStorage.setItem(key, _.isString(value) ? value : JSON.stringify(value));
+    },
+    get: function(key)
+    {
+      return JSON.parse(localStorage.getItem(key));
+    }
+  };
+
   function Run()
   {
     $('body').prepend('<toast>');
@@ -35,12 +46,12 @@
           if ( _.isArray(data) )
           {
             _.each(data, function(){
-              obj[data] = localStorage.getItem(STORAGEKEY+data);
+              obj[data] = storage.get(STORAGEKEY+data);
             });
           }
           else if ( _.isString(data) )
           {
-            obj[data] = localStorage.getItem(STORAGEKEY+data);
+            obj[data] = storage.get(STORAGEKEY+data);
           }
 
           chrome.storage[s].set(obj, function(){
@@ -48,7 +59,7 @@
             toast.dismiss();
 
             var lastSync = Date.now();
-            localStorage.setItem('lastSync', lastSync);
+            storage.set('lastSync', lastSync);
             chrome.storage[s].set({lastSync: lastSync}, angular.noop);
 
             if ( callback )
@@ -70,7 +81,7 @@
             toast.dismiss();
 
             if ( !_.isEmpty(data) )
-              localStorage.setItem(STORAGEKEY+key, data[key]);
+              storage.set(STORAGEKEY+key, data[key]);
 
             if ( callback )
               callback();
@@ -87,7 +98,7 @@
             toast.dismiss();
           toast = UI.toast(syncIcon + ' syncing...');
           var lastSync = {
-            local: eval(localStorage.getItem('lastSync'))
+            local: storage.get('lastSync')
           };
 
           chrome.storage[s].get(null, function(data){
@@ -101,7 +112,7 @@
             if ( !lastSync.local && lastSync.remote || lastSync.local < lastSync.remote )
             {
               _.each(_.omit(data, 'lastSync'), ReplaceLocal);
-              localStorage.setItem('lastSync', data.lastSync);
+              storage.set('lastSync', data.lastSync);
               UI.toast('<i class="fa fa-check"></i> Data synced');
             } else {
               ReplaceRemote();
@@ -110,7 +121,7 @@
             function ReplaceLocal(data, key)
             {
               if ( !_.isEmpty(data) )
-                localStorage.setItem(STORAGEKEY+key, data);
+                storage.set(STORAGEKEY+key, data);
             }
 
             function ReplaceRemote()
@@ -154,7 +165,7 @@
 
         // TODO:
         //UI.toast('<i class="fa fa-check"></i> Data synced');
-        //localStorage.setItem(STORAGEKEY+key, storageChange.newValue);
+        //storage.set(STORAGEKEY+key, storageChange.newValue);
         //*/
       }
     });
