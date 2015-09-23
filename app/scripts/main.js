@@ -18,13 +18,13 @@
 
   }
 
-  function Run($rootScope, Keypress, Sync, $localStorage)
+  function Run($rootScope, Keypress, Sync, $localStorage, _)
   {
 
     $rootScope.$storage = $localStorage;
 
     Sync.remote
-      .fetch()
+      .fetch();
     //.get('todo')
     //.get('note')
     //.get('feeds')
