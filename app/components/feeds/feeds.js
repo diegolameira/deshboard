@@ -46,8 +46,9 @@
 
     function init(storage)
     {
-      $scope.feeds = _.clone(storage.feeds);
-      $scope.feeds.map(getFeed);
+      var feeds = $scope.feeds = _.clone(storage.feeds);
+      if ( feeds )
+        feeds.map(getFeed);
     }
 
     function getFeed(url, key, collection)

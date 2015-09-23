@@ -1,10 +1,40 @@
 (function(){
   "use strict";
 
-  angular.module('ui', ['angular-carousel'])
+  angular.module('ui', ['angular-carousel', 'ngToast'])
     .directive('carousel', CarouselDirective)
+    .service('UI', UI)
 
   ;//////////////////////
+
+  function UI(ngToast)
+  {
+
+    return {
+      toast: Toast,
+    };
+
+    function Toast(title, config)
+    {
+      // Default config
+      config = _.merge({
+        content: title,
+      }, config);
+
+      var toast = ngToast.create(config);
+
+      return {
+        dismiss: function(){
+          ngToast.dismiss(toast);
+        },
+        dismissAll: function(){
+          ngToast.dismiss();
+        }
+      }
+
+    }
+
+  }
 
   function CarouselDirective()
   {

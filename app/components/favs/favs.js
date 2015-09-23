@@ -19,7 +19,7 @@
 
   }
 
-  function Controller($scope, _, $http, $localStorage)
+  function Controller($scope, _, $localStorage)
   {
 
     var defaults = [{

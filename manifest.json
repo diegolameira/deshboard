@@ -35,6 +35,7 @@
     "http://*/*",
     "https://*/*",
     "activeTab",
+    "storage",
     "https://ajax.googleapis.com/"
   ]
 }

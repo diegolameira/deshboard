@@ -2,7 +2,7 @@
 (function(global, angular){
   'use strict';
 
-  angular.module('app', ['ui', 'widgets', 'auth', 'ngStorage', 'angular-nicescroll', 'ui.tree'])
+  angular.module('app', ['ui', 'widgets', 'auth', 'ngStorage', 'angular-nicescroll', 'ui.tree', 'chrome'])
     .config(Config)
     .run(Run)
     .constant('moment', global.moment)
@@ -13,11 +13,32 @@
 
   function Config($sceProvider)
   {
+
     $sceProvider.enabled(false);
+
   }
 
-  function Run(Keypress)
+  function Run($rootScope, Keypress, Sync, $localStorage)
   {
+
+    $rootScope.$storage = $localStorage;
+
+    Sync.remote
+      .fetch()
+    //.get('todo')
+    //.get('note')
+    //.get('feeds')
+    //.get('favorites');
+
+    $rootScope.$watchCollection('$storage', function(data){
+      var obj = _.chain(data)
+        .pick(function(val, key){
+          return !~key.indexOf('$');
+        })
+        .value();
+      Sync.remote.set(obj);
+    });
+
     var listener = new Keypress.Listener();
 
     // Block save
