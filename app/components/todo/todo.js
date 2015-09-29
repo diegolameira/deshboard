@@ -85,6 +85,7 @@
 
     WidgetsProvider.register('todo', {
       title: 'Todo',
+      ico: 'list',
       template: 'components/todo/todo.html',
       controller: 'TodoController',
       nav: {

@@ -2,9 +2,10 @@
 (function(global, angular){
   'use strict';
 
-  angular.module('app', ['ui', 'widgets', 'auth', 'ngStorage', 'angular-nicescroll', 'ui.tree', 'chrome'])
+  angular.module('app', ['ui', 'widgets', 'ngStorage', 'angular-nicescroll', 'ui.tree', 'chrome', angularDragula(angular)])
     .config(Config)
     .run(Run)
+    .controller('WidgetsController', WidgetsController)
     .constant('moment', global.moment)
     .constant('_', global._)
     .constant('Keypress', global.keypress)
@@ -14,7 +15,6 @@
   function Config($sceProvider)
   {
     $sceProvider.enabled(false);
-
   }
 
   function Run($rootScope, Keypress, Sync, $localStorage, $localStorageDefaults, _)
@@ -24,10 +24,6 @@
 
     Sync.remote
       .fetch();
-    //.get('todo')
-    //.get('note')
-    //.get('feeds')
-    //.get('favorites');
 
     $rootScope.$watchCollection('$storage', function(data){
       var obj = _.chain(data)
@@ -47,5 +43,75 @@
     });
 
   }
+
+  function WidgetsController($scope, $localStorage, Widgets, dragulaService)
+  {
+
+    $scope.ui = $localStorage.$default({
+      dashboards: [{
+        title: 'Dashboard',
+        layout: 0,
+        widgets: [{
+          type: 'todo',
+          class: 'sunflower'
+        }, {
+          type: 'note',
+          class: 'turquoise'
+        }, {
+          type: 'favorites',
+          class: 'carrot'
+        }, {
+          type: 'clock',
+          class: 'midnightblue'
+        }, {
+          type: 'quote',
+          class: 'wisteria'
+        }, {
+          type: 'feeds',
+          class: 'pomegranate'
+        }]
+      }]
+    });
+
+    $scope.dashboardActive = $scope.ui.dashboards[0];
+
+    $scope.settings = {
+      layouts: [
+        [{height:'100%'},{height:'60%'},{height:'40%'},{height:'25%'},{height:'35%'},{height:'40%'}],
+        [{height:'33.3333%'},{height:'33.3333%'},{height:'33.3333%'},{height:'100%'},{height:'50%'},{height:'50%'}],
+        [{height:'50%'},{height:'50%'},{height:'50%'},{height:'50%'},{height:'50%'},{height:'50%'}],
+        [{height:'100%'},{height:'100%'},{height:'50%'},{height:'50%'},{height:'50%'},{height:'50%'}],
+      ],
+      colors: ['sunflower', 'turquoise', 'carrot', 'midnightblue', 'wisteria', 'pomegranate'],
+      widgets: Widgets
+    };
+
+    $scope.$on('widgets.drop', drop);
+
+    dragulaService.options($scope, 'widgets', {
+      on: true,
+      copy: true,
+    });
+
+    //////////////////////////////
+
+    function drop( ev, el, target, origin )
+    {
+      var dashboard = el.scope().dashboard;
+      dashboard.widgets = _.clone(dashboard.widgets).move(origin.index(), target.index());
+    }
+
+  }
+
+  Array.prototype.move = function (old_index, new_index) {
+    if (new_index >= this.length) {
+      var k = new_index - this.length;
+      while ((k--) + 1) {
+        this.push(undefined);
+      }
+    }
+    this.splice(new_index, 0, this.splice(old_index, 1)[0]);
+    return this; // for testing purposes
+  };
 
 })(window, window.angular);

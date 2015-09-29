@@ -1,7 +1,7 @@
 (function(){
   "use strict";
 
-  angular.module('ui', ['angular-carousel', 'ngToast'])
+  angular.module('ui', ['ngToast'])
     .directive('carousel', CarouselDirective)
     .service('UI', UI)
 

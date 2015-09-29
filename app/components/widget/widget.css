@@ -1,7 +1,7 @@
 .box {
   overflow: hidden;
   width: 33.3333%;
-  background-color: #666;
+  /* background-color: #666; */
   color: #eee;
   position: relative;
   border: 4px solid transparent;
@@ -20,6 +20,11 @@
   line-height: 1em;
   margin: 0;
   padding: 10px;
+}
+
+.box-title:before
+{
+  margin-right: 4px;
 }
 
 .box-options {

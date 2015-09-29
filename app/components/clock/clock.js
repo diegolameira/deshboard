@@ -12,6 +12,7 @@
 
     WidgetsProvider.register('clock', {
       title: 'Clock',
+      ico: 'clock-o',
       template: 'components/clock/clock.html',
       controller: 'ClockController'
     });

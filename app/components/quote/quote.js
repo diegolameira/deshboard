@@ -12,6 +12,7 @@
 
     WidgetsProvider.register('quote', {
       title: 'Quote',
+      ico: 'quote-left',
       template: 'components/quote/quote.html',
       controller: 'QuoteController'
     });

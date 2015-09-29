@@ -15,6 +15,7 @@
 
     WidgetsProvider.register('note', {
       title: 'Note',
+      ico: 'pencil',
       template: 'components/note/note.html',
       controller: 'NoteController'
     });

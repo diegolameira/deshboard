@@ -18,6 +18,7 @@
       this.type = normalize(name);
       this.name = name;
       this.title = config.title;
+      this.ico = config.ico;
       this.template = config.template;
       this.controller = config.controller;
       this.settings = config.settings;
@@ -47,7 +48,7 @@
   function Skeleton($controller, $rootScope, Widgets)
   {
     return {
-      scope: {},
+      //scope: {},
       replace: true,
       templateUrl: 'components/widget/skeleton.html',
       controller: controller,

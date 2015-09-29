@@ -1,0 +1,112 @@
+.menu {
+  overflow: auto;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1020;
+/*   min-width: 64px; */
+  max-width: 33.3333%;
+  background: rgba(0,0,0,.9);
+  color: #fff;
+  padding: 2em 0;
+  transition: transform ease-in-out 0.3s;
+  transform: translateX(calc(-100% + 2px));
+}
+
+.menu:hover {
+  transform: translateX(0);
+}
+
+.container {
+  -webkit-perspective: 1500px;
+	perspective: 1500px;
+}
+
+.dashboards {
+  position: relative;
+  left: 0;
+  z-index: 99;
+  height: 100%;
+  perspective: 1000px;
+  -webkit-transform-origin: 100% 50%;
+  transform-origin: 100% 50%;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+}
+
+.menu:hover + .dashboards {
+  -webkit-transform: rotateY(-10deg);
+  transform: rotateY(-10deg);
+}
+
+.menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  display: block;
+  overflow: hidden;
+  padding: .5em;
+  font-size: 1.4em;
+  line-height: 1;
+  border-bottom: 1px solid #333;
+}
+
+.droppables {
+}
+
+.droppables > li {
+  border: 0;
+  padding: 0;
+  float: left;
+}
+
+.droppable {
+  float: left;
+  display: block;
+  width: 128px;
+  height: 128px;
+  overflow: hidden;
+  text-align: center;
+  cursor: pointer;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.droppable:active,
+.droppable:focus:hover {
+  cursor: move;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+
+/*  LAYOUT */
+
+.droppable-layout {
+  display: flex;
+  flex-wrap: wrap;
+  background: #000;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
+.droppable-layout > div {
+  overflow: hidden;
+  width: 33.3333%;
+  background: rgba(255,255,255,.65);
+  position: relative;
+  /* border-radius: 6px; */
+  border: 1px solid #000;
+}
+
+.active > .droppable {
+  opacity: .5;
+}

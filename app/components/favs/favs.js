@@ -17,6 +17,7 @@
 
     WidgetsProvider.register('favorites', {
       title: 'Favorites',
+      ico: 'star',
       template: 'components/favs/favs.html',
       controller: 'FavoritesController',
       settings: 'components/favs/settings.html'

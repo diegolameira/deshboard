@@ -21,6 +21,7 @@
 
     WidgetsProvider.register('feeds', {
       title: 'Feeds',
+      ico: 'rss',
       template: 'components/feeds/feeds.html',
       controller: 'FeedsController',
       settings: 'components/feeds/settings.html'
