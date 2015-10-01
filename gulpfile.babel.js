@@ -169,7 +169,7 @@ gulp.task('manifest', () => {
     .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras', 'manifest'], () => {
+gulp.task('build', ['html', 'images', 'fonts', 'extras', 'manifest'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
