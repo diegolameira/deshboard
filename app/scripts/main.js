@@ -20,34 +20,7 @@
   function Run($rootScope, Keypress, Sync, $localStorage, $localStorageDefaults, _)
   {
 
-    $rootScope.$storage = $localStorage.$default($localStorageDefaults);
-
-    Sync.remote
-      .fetch();
-
-    $rootScope.$watchCollection('$storage', function(data){
-      var obj = _.chain(data)
-        .pick(function(val, key){
-          return !~key.indexOf('$');
-        })
-        .value();
-      Sync.remote.set(obj);
-    });
-
-    var listener = new Keypress.Listener();
-
-    // Block save
-    listener.simple_combo('meta s', function(ev) {
-      ev.preventDefault();
-      return;
-    });
-
-  }
-
-  function WidgetsController($scope, $localStorage, Widgets, dragulaService)
-  {
-
-    $scope.ui = $localStorage.$default({
+    $rootScope.$storage = $localStorage.$default(_.extend({}, $localStorageDefaults, {
       dashboards: [{
         title: 'Dashboard',
         layout: 0,
@@ -71,7 +44,36 @@
           class: 'pomegranate'
         }]
       }]
+    }));
+
+    Sync.remote
+      .fetch();
+
+    $rootScope.$watchCollection('$storage', function(data){
+      var obj = _.chain(data)
+        .pick(function(val, key){
+          return !~key.indexOf('$');
+        })
+        .value();
+      Sync.remote.set(obj);
     });
+
+    var listener = new Keypress.Listener();
+
+    // Block save
+    listener.simple_combo('meta s', function(ev) {
+      ev.preventDefault();
+      return;
+    });
+
+  }
+
+  function WidgetsController($rootScope, $scope, $compile, Widgets, dragulaService)
+  {
+
+    $scope.ui = {
+      dashboards: $rootScope.$storage.dashboards
+    };
 
     $scope.dashboardActive = $scope.ui.dashboards[0];
 
@@ -87,31 +89,33 @@
     };
 
     $scope.$on('widgets.drop', drop);
+    $scope.$on('widget.color.drop', drop);
 
     dragulaService.options($scope, 'widgets', {
       on: true,
       copy: true,
+      moves: function (el, container, handle) {
+        return !~handle.className.indexOf('dragular-ignore');
+      }
     });
 
     //////////////////////////////
 
+
     function drop( ev, el, target, origin )
     {
-      var dashboard = el.scope().dashboard;
-      dashboard.widgets = _.clone(dashboard.widgets).move(origin.index(), target.index());
+      var tpl = '<widget type="{{w.type}}" class="{{w.class}}"></widget>';
+      $scope.dashboardActive.widgets.swap(origin.index(), target.index());
+      $scope.$$postDigest(function(){
+        target.html($compile(tpl)(target.scope()));
+        origin.html($compile(tpl)(origin.scope()));
+      })
     }
 
   }
 
-  Array.prototype.move = function (old_index, new_index) {
-    if (new_index >= this.length) {
-      var k = new_index - this.length;
-      while ((k--) + 1) {
-        this.push(undefined);
-      }
-    }
-    this.splice(new_index, 0, this.splice(old_index, 1)[0]);
-    return this; // for testing purposes
-  };
+  Array.prototype.swap = function(a, b){
+    this[a] = this.splice(b, 1, this[a])[0];
+  }
 
 })(window, window.angular);

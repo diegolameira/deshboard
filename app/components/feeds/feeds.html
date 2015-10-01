@@ -8,9 +8,9 @@
       <h1 class="feed-title"><a ng-href="{{feed.link}}" ng-bind-html="feed.title"></a></h1>
       <ul class="feed-items">
         <li class="feed-item" ng-repeat="item in feed.entries">
-          <article>
-            <h2 class="feed-item-title">
-              <a href="{{item.link}}" ng-bind-html="item.title"></a>
+          <article class="dragular-ignore">
+            <h2 class="dragular-ignore feed-item-title">
+              <a href="{{item.link}}" class="dragular-ignore" ng-bind-html="item.title"></a>
             </h2>
           </article>
         </li>

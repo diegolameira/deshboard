@@ -46,28 +46,12 @@
         <ul>
           <li>
             <h3>Layouts</h3>
-            <ul class="droppables droppables-layout">
+            <ul>
               <li ng-class="{'active': dashboardActive.layout == $index}"
                   ng-repeat="layout in settings.layouts track by $index">
                 <div class="droppable droppable-layout" ng-click="dashboardActive.layout = $index">
                   <div ng-repeat="style in layout" ng-style="style"></div>
                 </div>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <h3>Colors</h3>
-            <ul class="droppables droppables-widget">
-              <li ng-repeat="color in settings.colors track by $index | orderBy:'type':false">
-                <div class="droppable droppable-widget {{color}}" title="{{color}}"></div>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <h3>Widgets</h3>
-            <ul class="droppables droppables-widget">
-              <li ng-repeat="widget in settings.widgets track by $index | orderBy:'type':false" dragula="'widgets'" dragula-model="widget">
-                <div class="droppable droppable-widget fa fa-{{widget.ico}}" title="{{widget.title}}"><br/><small>{{widget.title}}</small></div>
               </li>
             </ul>
           </li>
@@ -77,12 +61,18 @@
       <div class="dashboards">
         <div class="dashboard" ng-repeat="dashboard in ui.dashboards">
 
-          <widget type="{{w.type}}"
-                  class="{{w.class}}"
-                  ng-style="settings.layouts[dashboard.layout][$index]"
-                  ng-repeat="w in dashboard.widgets track by $index"
-                  dragula="'widgets'" dragula-model="w" dragula-scope="$parent.$parent"
-                  ></widget>
+          <div
+            class="box"
+            ng-style="settings.layouts[dashboard.layout][$index]"
+            ng-repeat="w in dashboard.widgets track by $index"
+            dragula="'widgets'" dragula-model="w" dragula-scope="$parent.$parent"
+            >
+
+            <widget type="{{w.type}}"
+                    class="{{w.class}}"
+                    ></widget>
+
+          </div>
 
         </div>
       </div>

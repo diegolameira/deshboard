@@ -10,13 +10,13 @@
 
 <!-- Nested node template -->
 <script type="text/ng-template" id="nodes_renderer.html">
-  <div ui-tree-handle class="tree-node tree-node-content" ng-class="{completed: node.completed}">
+  <div ui-tree-handle class="tree-node tree-node-content dragular-ignore" ng-class="{completed: node.completed}">
 
-    <div class="todo-controls-left">
+    <div class="todo-controls-left dragular-ignore">
       <input type="checkbox" ng-model="node.completed" ng-change="checkChildren(node)" />
       <span ng-if="node.nodes && node.nodes.length > 0" data-nodrag
             ng-click="toggle(this)"
-            class="fa todo-button"
+            class="fa todo-button dragular-ignore"
             ng-class="{
                 'fa-chevron-right todo-expand': collapsed,
                 'fa-chevron-down todo-collapse': !collapsed
@@ -25,7 +25,7 @@
 
 
     <p
-      class="todo-title"
+      class="todo-title dragular-ignore"
       data-nodrag
       ng-click="startEditing(node)"
       ng-blur="stopEditing()"

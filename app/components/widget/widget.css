@@ -1,15 +1,25 @@
-.box {
+.box,
+.gu-mirror {
   overflow: hidden;
   width: 33.3333%;
-  /* background-color: #666; */
   color: #eee;
   position: relative;
-  border: 4px solid transparent;
   order: 3;
   height: 100vh;
 }
 
-.box:hover {
+.box > section {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  border: 4px solid transparent;
+  transition: all ease-in-out .5s;
+}
+
+.box:hover > section {
   border-color: #fff;
 }
 
