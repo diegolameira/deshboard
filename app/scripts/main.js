@@ -105,7 +105,7 @@
     function drop( ev, el, target, origin )
     {
       var tpl = '<widget type="{{w.type}}" class="{{w.class}}"></widget>';
-      $scope.dashboardActive.widgets.swap(origin.index(), target.index());
+      swap.call($scope.dashboardActive.widgets, origin.index(), target.index());
       $scope.$$postDigest(function(){
         target.html($compile(tpl)(target.scope()));
         origin.html($compile(tpl)(origin.scope()));
@@ -114,7 +114,7 @@
 
   }
 
-  Array.prototype.swap = function(a, b){
+  function swap(a, b){
     this[a] = this.splice(b, 1, this[a])[0];
   }
 
