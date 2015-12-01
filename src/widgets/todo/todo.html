@@ -8,7 +8,7 @@
 		</form>
 	</header>
 
-	<div class="todo__placeholder" ng-if="!todos.length">
+	<div class="todo__placeholder" ng-if="!todos.children.length">
 		<p ng-if="!newForm.$submitted">
 			No tasks, start over!
 		</p>
@@ -17,9 +17,9 @@
 		</p>
 	</div>
 
-	<div ng-if="todos.length">
+	<div ng-if="todos.children.length">
 		<ol class="todo__list">
-			<li class="todo__item" ng-class="{'todo__item--completed': todo.completed}" ng-repeat="todo in todos" ng-include="'nodes_renderer.html'">
+			<li class="todo__item" ng-class="{'todo__item--completed': todo.data.completed}" ng-repeat="todo in todos.children" ng-include="'nodes_renderer.html'">
 			</li>
 		</ol>
 	</div>
@@ -28,9 +28,9 @@
 
 <!-- Nested node template -->
 <script type="text/ng-template" id="nodes_renderer.html">
-	<div class="todo__item-content" title="Created: {{todo.getCreatedDate()}}">
-		<input class="todo__checkbox" type="checkbox" ng-model="todo.completed" ng-change="TodoCtrl.checkChildren(todo)" />
-		<input class="todo__item-input" type="text" ng-model="todo.title" placeholder="Insert task title" ng-class="{active: !todo.title && !this.$dirty}" />
+	<div class="todo__item-content" title="Created: {{todo.data.getCreatedDate()}}">
+		<input class="todo__checkbox" type="checkbox" ng-model="todo.data.completed" ng-change="TodoCtrl.checkChildren(todo)" />
+		<input class="todo__item-input" type="text" ng-model="todo.data.title" placeholder="Insert task title" ng-class="{active: !todo.data.title && !this.$dirty}" />
 		<button class="todo__insert todo__action" ng-click="TodoCtrl.insert(todo)">
 			<i class="fa fa-plus"></i>
 			<span class="sr-only">Insert new</span>
@@ -40,8 +40,8 @@
 			<span class="sr-only">Remove</span>
 		</button>
 	</div>
-	<ol  ng-if="todo.todos.length" class="todo__list">
-		<li class="todo__item" ng-class="{'todo__item--completed': todo.completed}" ng-repeat="todo in todo.todos" ng-include="'nodes_renderer.html'">
+	<ol  ng-if="todo.children.length" class="todo__list">
+		<li class="todo__item" ng-class="{'todo__item--completed': todo.data.completed}" ng-repeat="todo in todo.children" ng-include="'nodes_renderer.html'">
 		</li>
 	</ol>
 </script>

@@ -2,8 +2,8 @@
 	'use strict';
 
 	angular.module('app')
-		.config(Config)
-		.controller('TodoCtrl', TodoCtrl)
+	.config(Config)
+	.controller('TodoCtrl', TodoCtrl)
 
 	function Config(WidgetsProvider)
 	{
@@ -16,11 +16,12 @@
 		})
 	}
 
-	function TodoCtrl($scope, $localStorage)
+	function TodoCtrl($scope, $localStorage, Tree)
 	{
 
 		var Todo = function(todo)
 		{
+
 			if ( typeof todo == 'string' )
 				todo = {title: todo};
 
@@ -29,51 +30,74 @@
 				created: Date.now()
 			}, todo);
 
-			this.title = todo.title;
-			this.completed =  todo.completed;
-			this.created = todo.created;
+			return {
+				id: guid(),
+				title : todo.title,
+				completed :  todo.completed,
+				created : todo.created
+			}
+
 		};
-
-		Todo.prototype.getCreatedDate = function()
-		{
-			return new Date(this.created).toString();
-		}
-
-		Todo.prototype.siblings = function()
-		{
-			return $scope.todos;
-		}
 
 		this.current = '';
 
 		this.add = add;
 		this.insert = insert;
 		this.remove = remove;
+		this.getCreatedDate = getCreatedDate;
 
 		this.checkChildren = checkChildren;
 
-		$scope.todos = $localStorage.todo.todos;
+		var tree = new Tree('todos');
+
+		$scope.todos = tree._root;
+
+		$scope.$watchCollection('todos', function(todos){
+			angular.extend($localStorage.todo.todos, angular.copy(todos));
+		});
+
+		function guid()
+		{
+			function s4() {
+				return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+			}
+			return s4() + '-' + s4() + '-' + s4();
+		}
+
+		function todoFactory(todo)
+		{
+			
+			if ( Object.prototype.toString.call( todo ) === '[object Array]' )
+				return [].concat(todo.map(todoFactory));
+
+			if (todo.todos)
+				todo.todos.map(todoFactory);
+
+			return new Todo(todo);
+
+		}
 
 		function add(todo)
 		{
-			$scope.todos.unshift(new Todo(todo));
+			todo = new Todo(todo);
 			this.current = '';
+			return tree.add(todo, tree._root.data, tree.traverseBF);
 		}
 
-		function insert(todo)
+		function insert(parent, todo)
 		{
-			var newTodo = new Todo();
-			todo.todos = todo.todos || [];
-			todo.todos.unshift(newTodo);
-			newTodo.siblings = function()
-			{
-				return todo.todos;
-			}
+			todo = new Todo(todo || '');
+			return tree.add(todo, parent.data, tree.traverseDF);
 		}
 
-		function remove(todo)
+		function remove(node, parent)
 		{
-			(todo.siblings() || todos).splice(todos.indexOf(todo), 1);
+			return tree.remove(node.data, node.parent.data, tree.traverseBF);
+		}
+
+		function getCreatedDate(todo)
+		{
+			return new Date(todo.created).toString();
 		}
 
 		function checkChildren(todo)
