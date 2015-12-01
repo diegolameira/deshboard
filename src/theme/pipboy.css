@@ -1,0 +1,140 @@
+.theme-pipboy
+{
+	color: rgb(0, 146, 45);
+	background: #000E04;
+	border-color: rgb(0, 146, 45);
+	font-weight: bolder;
+	text-transform: uppercase;
+ 	animation: pipboy 5s 10s alternate infinite;
+	-webkit-transition: none;
+	transition: none;
+}
+
+.theme-pipboy:before {
+	display: block;
+	z-index: 2;
+	pointer-events: none;
+    content: '';
+    position: absolute;
+    opacity: .05;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#494949+46,494949+46,494949+50,000000+54 */
+    background: #494949; /* Old browsers */
+    background: -moz-linear-gradient(top,  #494949 46%, #494949 46%, #494949 50%, #000000 54%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #494949 46%,#494949 46%,#494949 50%,#000000 54%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #494949 46%,#494949 46%,#494949 50%,#000000 54%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background-repeat: repeat;
+    background-size: 10px;
+}
+
+@keyframes pipboy
+{
+	0% { opacity: 1; }
+	10% { opacity: 1; }
+	11% { opacity: .5; transform: scale(1) translate(0px); }
+	12% { opacity: .8; transform: scale(1.1) translate(-10px); }
+	13% { opacity: .5; transform: scale(1) translate(0px); }
+	14% { opacity: 1; }
+	40% { opacity: 1; }
+	41% { opacity: .5; transform: scale(1) translate(0px); -webkit-filter: blur(0px); }
+	42% { opacity: .8; transform: scale(1.1) translate(-10px); -webkit-filter: blur(10px); }
+	43% { opacity: .5; transform: scale(1) translate(0px); -webkit-filter: blur(0px); }
+	45% { opacity: 1; }
+	100% { opacity: 1; }
+}
+
+.theme-pipboy a, 
+.theme-pipboy h1, 
+.theme-pipboy h2, 
+.theme-pipboy h3
+{
+	color: rgb(0, 146, 45);
+	font-weight: bolder;
+}
+
+.theme-pipboy nav
+{
+	background: transparent;
+}
+
+.theme-pipboy nav .button-group
+{
+	margin-bottom: 2px;
+}
+
+.theme-pipboy nav button
+{
+	font-weight: bolder;
+}
+
+.theme-pipboy nav button.active
+{
+	background: rgba(0, 146, 45, 1);
+	color: #000E04;
+}
+
+.theme-pipboy .dashboard-block
+{
+	border-width: 1px;
+	border-color: inherit;
+}
+
+.theme-pipboy .dashboard-main
+{
+	margin-top: 45px;
+}
+
+.theme-pipboy .dashboard-header
+{
+	margin: 4px;
+	background: rgba(0, 146, 45, .2);
+}
+
+.theme-pipboy input,
+.theme-pipboy textarea
+{
+	text-transform: uppercase;
+	font-weight: bolder;
+	color: rgb(0, 146, 45);
+	border-color: rgba(0, 146, 45, 1);
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 0;
+	background: rgba(0, 146, 45, .1);
+}
+
+.theme-pipboy input:hover,
+.theme-pipboy textarea:hover
+{
+	background: rgba(0, 146, 45, .4);
+}
+
+.theme-pipboy input:focus,
+.theme-pipboy input:active,
+.theme-pipboy input.active,
+.theme-pipboy textarea:focus,
+.theme-pipboy textarea:active,
+.theme-pipboy textarea.active
+{
+	background: rgba(0, 146, 45, 1);
+	color: #000E04;
+}
+
+.theme-pipboy ::-webkit-input-placeholder {
+   color: rgba(0, 146, 45, .4);
+}
+
+.theme-pipboy  :-moz-placeholder {
+   color: rgba(0, 146, 45, .4);
+}
+
+.theme-pipboy ::-moz-placeholder {
+   color: rgba(0, 146, 45, .4);  
+}
+
+.theme-pipboy :-ms-input-placeholder {  
+   color: rgba(0, 146, 45, .4);  
+}

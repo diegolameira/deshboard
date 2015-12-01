@@ -1,0 +1,64 @@
+
+.todo__list
+{
+	display: block;
+	list-style: none;
+	margin-top: 10px;
+}
+
+.todo__list .todo__list
+{
+	margin-left: 10px;
+}
+
+.todo__item-content
+{
+	display: block;
+	display: flex;
+}
+
+.todo__item-input
+{
+	background-color: transparent;
+	color: inherit;
+}
+
+.todo__item-input:focus,
+.todo__item-input:active,
+.todo__item-input.active
+{
+	background-color: #fff;
+	color: #000;
+}
+
+.todo__item--completed .todo__item-input
+{
+	text-decoration: line-through;
+}
+
+.todo__action
+{
+	opacity: 0;
+	cursor: pointer;
+	background: 0;
+	padding: 10px 10px;
+}
+
+.todo__item-content:hover > .todo__action
+{
+	opacity: .6;
+}
+
+.todo__item-content > .todo__action:hover
+{
+	opacity: 1;
+}
+
+.todo__placeholder
+{
+	text-align: center;
+	padding: 20px;
+	margin: 20px;
+/* 	border: 1px solid rgba(102, 179, 180, .1);
+	color: rgba(102, 179, 180, .2); */
+}

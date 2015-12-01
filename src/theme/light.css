@@ -1,0 +1,25 @@
+body.theme-light
+{
+	color: rgba(0,25,35,1);
+	background: #f6f6f6;
+}
+
+.theme-light nav
+{
+	background: rgba(0,0,0,.2);
+}
+
+.theme-light nav button
+{
+	background: rgba(0,0,0,.2);
+}
+
+.theme-light .dashboard-block
+{
+	border: 1px solid rgba(0,0,0,.2);
+}
+
+.theme-light .dashboard-header
+{
+	background: rgba(0,0,0,.2);
+}

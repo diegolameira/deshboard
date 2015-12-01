@@ -1,0 +1,87 @@
+.feeds__list
+{
+	display: block;
+	list-style: none;
+	margin-top: 10px;
+}
+
+.feeds__item
+{padding: 10px 0;border-bottom: 1px solid rgba(0,0,0,.2);}
+
+.feeds__link
+{
+	display: block;
+	display: flex;
+	align-items: center;
+	padding: 5px;
+}
+
+.feeds__favicon
+{
+	position: relative;
+	min-width: 40px;
+	min-height: 40px;
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+	background: #fff;
+	border: 4px solid #fff;
+	border-radius: 6px;
+}
+
+.feeds__favicon-img
+{
+	width: 100%;
+	height: auto;
+}
+
+.feeds__item-input
+{
+	height: 40px;
+	margin: 5px 0;
+}
+
+.feeds__action
+{
+	opacity: 0;
+	cursor: pointer;
+	background: 0;
+	padding: 10px 10px;
+}
+
+.feeds__item:hover > .feeds__action
+{
+	opacity: .6;
+}
+
+.feeds__item > .feeds__action:hover
+{
+	opacity: 1;
+}
+
+.feeds__placeholder
+{
+	text-align: center;
+	padding: 20px;
+	margin: 20px;
+/* 	border: 1px solid rgba(102, 179, 180, .1);
+	color: rgba(102, 179, 180, .2); */
+}
+
+.feeds_item-title
+{
+}
+
+.feeds__item-entries
+{
+	display: block;
+	margin-top: 10px;
+	list-style: none;
+}
+
+.feeds__item-entries__item-content
+{
+	display: block;
+	padding: 4px 0;
+	border-top: 1px solid rgba(0,0,0,.2);
+}

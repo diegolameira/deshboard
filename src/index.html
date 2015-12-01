@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Dashboard</title>
+	<link href='https://fonts.googleapis.com/css?family=Roboto:900,400,300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="theme/legacy.css">
+	<link rel="stylesheet" href="theme/light.css">
+	<link rel="stylesheet" href="theme/dark.css">
+	<link rel="stylesheet" href="theme/pipboy.css">
+</head>
+<body ng-app="app" ng-controller="MainCtrl" ng-class="$storage.theme">
+
+	<div class="container">
+
+		<nav>
+
+			<a href="" class="profile"></a>
+
+			<div class="button-group">
+				<button class="active" title="Dashboard 1">1</button>
+			</div>
+
+			<div class="button-group">
+				<button ng-click="$storage.theme='theme-standard'" ng-class="{active: $storage.theme == 'theme-standard'}" title="Standard Theme">Standard</button>
+				<button ng-click="$storage.theme='theme-legacy'" ng-class="{active: $storage.theme == 'theme-legacy'}" title="Legacy Theme">Legacy</button>
+				<button ng-click="$storage.theme='theme-pipboy'" ng-class="{active: $storage.theme == 'theme-pipboy'}" title="Pip-boy Theme">Pip-boy</button>
+				<button ng-click="$storage.theme='theme-light'" ng-class="{active: $storage.theme == 'theme-light'}" title="Light Theme">Light</button>
+				<button ng-click="$storage.theme='theme-dark'" ng-class="{active: $storage.theme == 'theme-dark'}" title="Ocean Theme">Ocean</button>
+			</div>
+
+		</nav>
+
+		<div class="dashboard">
+
+			<div widget="widget" class="dashboard-block" ng-repeat="widget in $storage.blocks">
+				<header class="dashboard-header">
+					<h3 class="dashboard-title" ng-bind="widget.title"></h3>
+				</header>
+				<div class="dashboard-main">
+					<div ng-include="widget.templateUrl"></div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<script src="../bower_components/angular/angular.js"></script>
+	<script src="../bower_components/ngstorage/ngStorage.js"></script>
+
+	<script src="main.js"></script>
+
+	<script src="widgets/todo/todo.js"></script>
+	<script src="widgets/note/note.js"></script>
+	<script src="widgets/clock/clock.js"></script>
+	<script src="widgets/favs/favs.js"></script>
+	<script src="widgets/feeds/feeds.js"></script>
+
+</body>
+</html>

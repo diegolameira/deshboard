@@ -1,0 +1,68 @@
+.theme-dark
+{
+	color: rgba(255,255,255,.8);
+	background: #152833;
+}
+
+.theme-dark a, 
+.theme-dark h1, 
+.theme-dark h2, 
+.theme-dark h3
+{
+	color: #66B3B4;
+}
+
+.theme-dark nav
+{
+	background: #101E29;
+}
+
+.theme-dark nav .button-group
+{
+	margin-bottom: 2px;
+}
+
+.theme-dark nav button
+{
+	background: rgba(21, 40, 51, .6);
+	color: #66B3B4;
+	border-right: 4px solid rgba(102, 179, 180, .5);	
+}
+
+.theme-dark nav button.active
+{
+	color: #fff;
+	background: #152833;
+	border-right: 4px solid #66B3B4;
+}
+
+.theme-dark .dashboard-block
+{
+	border: 1px solid #101E29;
+}
+
+.theme-dark .dashboard-header
+{
+	background: #101E29;
+}
+
+
+.theme-dark .dashboard-header
+{
+	transform: translateY(-40px);
+}
+
+.theme-dark .dashboard-block:hover .dashboard-header
+{
+	transform: translateY(0);
+}
+
+.theme-dark .dashboard-main
+{
+	margin-top: 0;
+}
+
+.theme-dark .dashboard-block:hover .dashboard-main header
+{
+	margin-top: 40px;
+}

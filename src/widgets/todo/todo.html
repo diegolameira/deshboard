@@ -1,0 +1,47 @@
+<div class="todo" ng-controller="TodoCtrl as TodoCtrl">
+
+	<link rel="stylesheet" href="widgets/todo/todo.css" />
+
+	<header class="todo__header">
+		<form name="newForm" ng-submit="TodoCtrl.add(TodoCtrl.current)">
+			<input name="newInput" class="todo__new-input" type="text" placeholder="What needs to be done?" ng-model="TodoCtrl.current">
+		</form>
+	</header>
+
+	<div class="todo__placeholder" ng-if="!todos.length">
+		<p ng-if="!newForm.$submitted">
+			No tasks, start over!
+		</p>
+		<p ng-if="newForm.$submitted">
+			Nothing better than zero tasks in a todo list, congrats!
+		</p>
+	</div>
+
+	<div ng-if="todos.length">
+		<ol class="todo__list">
+			<li class="todo__item" ng-class="{'todo__item--completed': todo.completed}" ng-repeat="todo in todos" ng-include="'nodes_renderer.html'">
+			</li>
+		</ol>
+	</div>
+
+</div>
+
+<!-- Nested node template -->
+<script type="text/ng-template" id="nodes_renderer.html">
+	<div class="todo__item-content" title="Created: {{todo.getCreatedDate()}}">
+		<input class="todo__checkbox" type="checkbox" ng-model="todo.completed" ng-change="TodoCtrl.checkChildren(todo)" />
+		<input class="todo__item-input" type="text" ng-model="todo.title" placeholder="Insert task title" ng-class="{active: !todo.title && !this.$dirty}" />
+		<button class="todo__insert todo__action" ng-click="TodoCtrl.insert(todo)">
+			<i class="fa fa-plus"></i>
+			<span class="sr-only">Insert new</span>
+		</button>
+		<button class="todo__remove todo__action" ng-click="TodoCtrl.remove(todo)">
+			<i class="fa fa-trash"></i>
+			<span class="sr-only">Remove</span>
+		</button>
+	</div>
+	<ol  ng-if="todo.todos.length" class="todo__list">
+		<li class="todo__item" ng-class="{'todo__item--completed': todo.completed}" ng-repeat="todo in todo.todos" ng-include="'nodes_renderer.html'">
+		</li>
+	</ol>
+</script>

@@ -1,6 +1,0 @@
-<div class="source" ng-repeat="favorite in $storage.favorites track by $index">
-  <input type="text"ng-model="favorite.title" placeholder="Place a favorite title here" />
-  <input type="text"ng-model="favorite.link" placeholder="Place a favorite url here" />
-  <button ng-click="removeSource($index)" class="remove fa fa-times"></button>
-</div>
-<button  ng-click="addSource()" class="button-addsource fa fa-plus">Add favorite</button>

@@ -1,0 +1,33 @@
+<div class="feeds" ng-controller="FeedsCtrl as FeedsCtrl">
+
+	<link rel="stylesheet" href="widgets/feeds/feeds.css" />
+
+	<header class="feeds__header">
+		<form name="newForm" ng-submit="FeedsCtrl.add(FeedsCtrl.current)">
+			<input name="newInput" class="feeds__new-input" type="text" placeholder="Enter your Atom/RSS feed url" ng-model="FeedsCtrl.current">
+		</form>
+	</header>
+
+	<div class="feeds__placeholder" ng-if="!readableFeeds.length">
+		<p ng-if="!newForm.$submitted">
+			No feed, start over!
+		</p>
+		<p ng-if="newForm.$submitted">
+			My God, your leaving all your feeds behind. Hurry up and set those again!
+		</p>
+	</div>
+
+	<div ng-if="readableFeeds.length">
+		<ol class="feeds__list">
+			<li class="feeds__item" ng-repeat="feed in readableFeeds">
+				<h4 class="feeds_item-title" ng-bind="feed.title"></h4>
+				<ol class="feeds__item-entries">
+					<li class="feeds__item-entries__item" ng-repeat="entry in feed.entries">
+						<a ng-href="{{entry.link}}" class="feeds__item-entries__item-content" ng-bind="entry.title"></a>
+					</li>
+				</ol>
+			</li>
+		</ol>
+	</div>
+
+</div>

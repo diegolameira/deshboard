@@ -1,0 +1,44 @@
+<div class="favs" ng-controller="FavsCtrl as FavsCtrl">
+
+	<link rel="stylesheet" href="widgets/favs/favs.css" />
+
+	<header class="favs__header">
+		<form name="newForm" ng-submit="FavsCtrl.add(FavsCtrl.current)">
+			<input name="newInput" class="favs__new-input" type="text" placeholder="Enter your favorite website url" ng-model="FavsCtrl.current">
+		</form>
+	</header>
+
+	<div class="favs__placeholder" ng-if="!favs.length">
+		<p ng-if="!newForm.$submitted">
+			No favorite, start over!
+		</p>
+		<p ng-if="newForm.$submitted">
+			My God, your leaving all your favorites behind. Hurry up and set those again!
+		</p>
+	</div>
+
+	<div ng-if="favs.length">
+		<ol class="favs__list">
+			<li class="favs__item" ng-repeat="fav in favs">
+				<a ng-href="{{fav.url}}" class="favs__link">
+					<div class="favs__favicon">
+						<img ng-src="{{fav.favico}}" class="favs__favicon-img u-centered" />
+					</div>
+					<span ng-if="!editing" ng-bind="fav.title || fav.url"></span>
+				</a>
+				<form ng-submit="editing=null">
+					<input type="text" class="favs__item-input" ng-model="fav.title" ng-if="editing" />
+				</form>
+				<button class="favs__edit favs__action" ng-click="editing=!editing">
+					<i class="fa fa-pencil"></i>
+					<span class="sr-only">Editar</span>
+				</button>
+				<button class="favs__remove favs__action" ng-click="FavsCtrl.remove(fav)">
+					<i class="fa fa-trash"></i>
+					<span class="sr-only">Remove</span>
+				</button>
+			</li>
+		</ol>
+	</div>
+
+</div>

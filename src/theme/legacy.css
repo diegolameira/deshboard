@@ -1,0 +1,21 @@
+.theme-legacy
+{
+
+}
+
+.theme-legacy .dashboard-block
+{
+	border: 4px solid transparent;
+}
+
+.theme-legacy .dashboard-block:hover
+{
+	border-color: #fff;
+}
+
+.theme-legacy .dashboard-header
+{
+	text-align: left;
+	padding: 0 10px;
+	background: none;
+}
