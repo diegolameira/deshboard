@@ -51,6 +51,7 @@
 		var tree = new Tree('todos');
 
 		$scope.todos = tree._root;
+		$scope.tree = tree;
 
 		$scope.$watchCollection('todos', function(todos){
 			angular.extend($localStorage.todo.todos, angular.copy(todos));

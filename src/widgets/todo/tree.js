@@ -55,13 +55,36 @@
 		}
 	};
 
+	Tree.prototype.load = function(data)
+	{
+		// TODO: load exported data
+	}
+
+	Tree.prototype.export = function(node)
+	{
+		var obj = {},
+		node = angular.copy(node||this._root);
+
+		return recursiveChildrenAdd(node.children, obj);
+
+		function recursiveChildrenAdd(children, parentData)
+		{
+			parentData.children = children.map(function(child){
+				return  recursiveChildrenAdd(child.children, child.data);
+			});
+
+			return parentData;
+		}
+
+	}
+
 	Tree.prototype.contains = function(callback, traversal) {
 		traversal.call(this, callback);
 	};
 
 	Tree.prototype.add = function(data, toData, traversal) {
 		var child = new Node(data),
-		parent = false,
+		parent = null,
 		callback = function(node) {
 			if (node.data === toData) {
 				parent = node;
