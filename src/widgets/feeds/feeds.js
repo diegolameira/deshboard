@@ -16,7 +16,7 @@
 		})
 	}
 
-	function FeedsCtrl($scope, $localStorage, $http)
+	function FeedsCtrl($scope, $localStorage, $http, $q)
 	{
 
 		var feeds = $scope.feeds = $localStorage.feeds.items;
@@ -32,16 +32,25 @@
 		function init(feeds)
 		{
 
+			var baseUrl = 'https://ajax.googleapis.com/ajax/services/feed/load?callback=JSON_CALLBACK&v=2.0&q=';	
+			var old = sessionStorage.getItem('rssLastRequest')  <= Date.now() - (1*60*60*1000);
+			var cache = JSON.parse(sessionStorage.getItem('rssCache'));
+
 			feeds = angular.copy(feeds);
-			feeds.map(getFeed);
-			$scope.readableFeeds = feeds;
+			$scope.readableFeeds = cache;
+
+			if ( old || !cache)
+				$q.all(feeds.map(getFeed)).then(function(response){
+					sessionStorage.setItem('rssLastRequest', Date.now());
+					sessionStorage.setItem('rssCache', JSON.stringify(response));
+					$scope.readableFeeds = response;
+				});
 
 			function getFeed(url, key, collection)
 			{
-				var baseUrl = 'https://ajax.googleapis.com/ajax/services/feed/load?callback=JSON_CALLBACK&v=2.0&q=';
-				$http.jsonp(baseUrl + url).then(function(response){
+				return $http.jsonp(baseUrl + url).then(function(response){
 					// TODO: notify user (if nothing was found, error...)
-					collection[key] = response.data.responseData.feed;
+					return response.data.responseData.feed;
 				});
 			}
 		}

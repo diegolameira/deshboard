@@ -19,7 +19,7 @@
 
 	<div ng-if="readableFeeds.length">
 		<ol class="feeds__list">
-			<li class="feeds__item" ng-repeat="feed in readableFeeds">
+			<li class="feeds__item" ng-repeat="feed in readableFeeds track by $index">
 				<h4 class="feeds_item-title" ng-bind="feed.title"></h4>
 				<ol class="feeds__item-entries">
 					<li class="feeds__item-entries__item" ng-repeat="entry in feed.entries">
