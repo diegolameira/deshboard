@@ -25,7 +25,7 @@
       "all_frames": false
     }
   ],
-  "content_security_policy": "default-src 'unsafe-eval' 'self' https://*.firebaseio.com/; connect-src http://www.bing.com/ wss://*.firebaseio.com/; font-src 'self' https://fonts.gstatic.com/ https://fonts.googleapis.com https://maxcdn.bootstrapcdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.googleapis.com https://maxcdn.bootstrapcdn.com; script-src 'unsafe-eval' 'self' https://*.firebaseio.com/ https://*.googleapis.com/; img-src http://www.bing.com",
+  "content_security_policy": "default-src 'unsafe-eval' 'self' https://*.firebaseio.com/; connect-src * http://www.bing.com/ wss://*.firebaseio.com/; font-src 'self' https://fonts.gstatic.com/ https://fonts.googleapis.com https://maxcdn.bootstrapcdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.googleapis.com https://maxcdn.bootstrapcdn.com; script-src 'unsafe-eval' 'self' https://*.firebaseio.com/ https://*.googleapis.com/; img-src * http://www.bing.com",
   "chrome_url_overrides": {
     "newtab": "src/index.html"
   },
