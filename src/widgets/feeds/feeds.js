@@ -40,15 +40,38 @@
 			{
 				var baseUrl = 'https://ajax.googleapis.com/ajax/services/feed/load?callback=JSON_CALLBACK&v=2.0&q=';
 				$http.jsonp(baseUrl + url).then(function(response){
+					// TODO: notify user (if nothing was found, error...)
 					collection[key] = response.data.responseData.feed;
 				});
 			}
 		}
 
-		function add(feedUrl)
+		function add(url)
 		{
-			feeds.unshift(normalizeURL(feedUrl));
-			this.current = '';
+			var _this = this;
+			
+			url = normalizeURL(url);
+
+			if (~url.indexOf('.xml'))
+				return push(url);
+			
+			return $http.get(url, {responseType: 'document'}).then(function(response){
+				var rss;
+				var nodeList = response.data.getElementsByTagName("link");
+				for (var i = 0; i < nodeList.length; i++)
+					if((nodeList[i].getAttribute("rel") == "alternate")||(nodeList[i].getAttribute("type") == "'application/rss+xml'"))
+						rss = nodeList[i].getAttribute("href");
+				if ( rss && !~rss.indexOf('//') )
+					rss = url + rss;
+				return push(rss || url);
+			});
+
+			function push(url)
+			{
+				feeds.unshift(url);
+				_this.current = '';
+			}
+			
 		}
 
 		function remove(feedUrl)
@@ -58,6 +81,7 @@
 
 		function normalizeURL(url)
 		{
+			url = url.substr(-1) === '/' ? url.substr(0, url.length - 1) : url;
 			return !/^(?:f|ht)tps?\:\/\//.test(url) ? 'http://' + url : url;
 		}
 
