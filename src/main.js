@@ -92,6 +92,11 @@
 		// dev only
 		$scope.$storage.blocks = Widgets;
 
+		$scope.googleit = function(term)
+		{
+			return 'http://google.com/search?q=' + encodeURIComponent(term);
+		}
+
 	}
 
 })(document, window, angular);

@@ -1,0 +1,13 @@
+<div class="quotes" ng-controller="QuotesCtrl as QuotesCtrl">
+
+	<link rel="stylesheet" href="widgets/quotes/quotes.css" />
+
+	<blockquote class="quote">
+		<p class="quote__content" ng-bind="::quote.contentSnippet"></p>
+		<cite class="quote__cite">
+			<a ng-href="{{::googleit(quote.author)}}" class="quote__link" ng-bind="::quote.author"></a>
+		</cite>
+		<a ng-href="{{::quote.link}}" class="quote__copy" title="They said so">they said so</a>
+	</blockquote>
+
+</div>

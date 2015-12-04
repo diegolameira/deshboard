@@ -1,0 +1,42 @@
+.quote 
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 500px;
+    display: block;
+    margin: 0;
+    padding: 30px;
+    font-size: 1.6em;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.quote:before 
+{
+    position: absolute;
+    color: rgba(0, 0, 0, .1);
+    content: open-quote;
+    font-size: 10em;
+    line-height: 1;
+    top: -2rem;
+    left: -1rem;
+}
+
+.quote__cite 
+{
+    display: block;
+    text-align: right;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+.quote__copy 
+{
+	font-size: .8rem;
+	text-align: right;
+	opacity: .5;
+	text-decoration: none;
+}
