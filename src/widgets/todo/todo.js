@@ -46,7 +46,7 @@
 		function add(todo)
 		{
 			this.current = '';
-			return $scope.todos.push(new Todo(todo));
+			return $scope.todos.unshift(new Todo(todo));
 		}
 
 		function remove(todo)
