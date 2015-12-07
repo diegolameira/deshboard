@@ -5,7 +5,7 @@
 		components: 'widgets'
 	};
 
-	angular.module('app', ['ngStorage'])
+	angular.module('app', ['ngStorage', 'ng-sortable'])
 		.provider('Widgets', Widgets)
 		.directive('widget', WidgetDirective)
 		.controller('MainCtrl', MainController)

@@ -18,7 +18,7 @@
 	</div>
 
 	<div ng-if="todos.length">
-		<ol class="todo__list">
+		<ol class="todo__list" ng-sortable>
 			<li class="todo__item" ng-class="{'todo__item--completed': todo.completed}" ng-repeat="todo in todos" ng-include="'nodes_renderer.html'">
 			</li>
 		</ol>

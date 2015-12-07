@@ -18,7 +18,7 @@
 	</div>
 
 	<div ng-if="favs.length">
-		<ol class="favs__list">
+		<ol class="favs__list" ng-sortable>
 			<li class="favs__item" ng-repeat="fav in favs">
 				<a ng-href="{{fav.url}}" class="favs__link">
 					<div class="favs__favicon">

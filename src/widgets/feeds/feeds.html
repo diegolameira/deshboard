@@ -18,7 +18,7 @@
 	</div>
 
 	<div ng-if="readableFeeds.length">
-		<ol class="feeds__list">
+		<ol class="feeds__list" ng-sortable>
 			<li class="feeds__item" ng-repeat="feed in readableFeeds track by $index">
 				<h4 class="feeds_item-title" ng-bind="feed.title"></h4>
 				<button class="feeds__remove feeds__action" ng-click="FeedsCtrl.remove(feed)">
