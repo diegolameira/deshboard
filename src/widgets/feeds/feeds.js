@@ -72,20 +72,25 @@
 						rss = nodeList[i].getAttribute("href");
 				if ( rss && !~rss.indexOf('//') )
 					rss = url + rss;
-				return push(rss || url);
+				return push(rss);
 			});
 
 			function push(url)
 			{
-				feeds.unshift(url);
+				if (!url) return;
+				sessionStorage.removeItem('rssLastRequest');
+				sessionStorage.removeItem('rssCache');
 				_this.current = '';
+				return feeds.unshift(url);
 			}
 			
 		}
 
-		function remove(feedUrl)
+		function remove(url)
 		{
-			feeds.splice(feeds.indexOf(feedUrl), 1);
+			sessionStorage.removeItem('rssLastRequest');
+			sessionStorage.removeItem('rssCache');
+			return feeds.splice(feeds.indexOf(url), 1);
 		}
 
 		function normalizeURL(url)

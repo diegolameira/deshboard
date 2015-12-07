@@ -6,7 +6,11 @@
 }
 
 .feeds__item
-{padding: 10px 0;border-bottom: 1px solid rgba(0,0,0,.2);}
+{
+	padding: 10px 0;
+	border-bottom: 1px solid rgba(0,0,0,.2);
+	position: relative;
+}
 
 .feeds__link
 {
@@ -41,6 +45,13 @@
 	margin: 5px 0;
 }
 
+.feeds__remove
+{
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
 .feeds__action
 {
 	opacity: 0;
@@ -70,7 +81,7 @@
 
 .feeds_item-title
 {
-}
+padding-right: 40px;}
 
 .feeds__item-entries
 {

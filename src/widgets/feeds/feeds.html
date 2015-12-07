@@ -21,6 +21,10 @@
 		<ol class="feeds__list">
 			<li class="feeds__item" ng-repeat="feed in readableFeeds track by $index">
 				<h4 class="feeds_item-title" ng-bind="feed.title"></h4>
+				<button class="feeds__remove feeds__action" ng-click="FeedsCtrl.remove(feed)">
+					<i class="fa fa-trash"></i>
+					<span class="sr-only">Remove</span>
+				</button>
 				<ol class="feeds__item-entries">
 					<li class="feeds__item-entries__item" ng-repeat="entry in feed.entries">
 						<a ng-href="{{entry.link}}" class="feeds__item-entries__item-content" ng-bind="entry.title"></a>
