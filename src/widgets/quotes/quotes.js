@@ -11,10 +11,7 @@
 			title: 'Quotes',
 			template: 'quotes.html',
 			storage: {
-				items: [
-					'http://feeds.feedburner.com/theysaidso/qod/inspire',
-					// 'http://api.theysaidso.com/qod'
-					]
+				items: [] 
 			}
 		})
 	}
@@ -22,34 +19,24 @@
 	function QuotesCtrl($scope, $localStorage, $http, $q)
 	{
 
-		$scope.quotes = [];
-		$scope.quote = {};
-		init($localStorage.quotes.items);
+		$scope.quote = getRandom($localStorage.quotes.items);
 
-		function init(quotes)
+		load(['http://feeds.feedburner.com/theysaidso/qod/inspire']);
+
+		function load(resources)
 		{
 
 			var baseUrl = 'https://ajax.googleapis.com/ajax/services/feed/load?callback=JSON_CALLBACK&v=2.0&q=';	
 			var old = sessionStorage.getItem('quotesLastRequest')  <= Date.now() - (24*60*60*1000);
-			var cache = JSON.parse(sessionStorage.getItem('quotesCache')) || [];
 
-			quotes = angular.copy(quotes);
+			resources = angular.copy(resources);
 
-			update(cache);
-
-			if ( old || !cache.length)
-				$q.all(quotes.map(getQuotes)).then(function(response){
+			if ( old || !$localStorage.quotes.items.length)
+				$q.all(resources.map(getQuotes)).then(function(quotes){
 					sessionStorage.setItem('quotesLastRequest', Date.now());
-					cache = cache.concat(response).splice(-10)
-					sessionStorage.setItem('quotesCache', JSON.stringify(cache));
-					update(cache);
+					$localStorage.quotes.items = $localStorage.quotes.items.concat(quotes).unique().splice(-10);
+					$scope.quote = getRandom($localStorage.quotes.items);
 				});
-
-			function update(quotes)
-			{
-				$scope.quotes = quotes;
-				$scope.quote = quotes[Math.floor(Math.random() * quotes.length)];
-			}
 
 			function getQuotes(url, key, collection)
 			{
@@ -66,11 +53,30 @@
 
 		}
 
+		function getRandom(array)
+		{
+			return array[Math.floor(Math.random() * array.length)];
+		}
+
 		function normalizeURL(url)
 		{
 			url = url.substr(-1) === '/' ? url.substr(0, url.length - 1) : url;
 			return !/^(?:f|ht)tps?\:\/\//.test(url) ? 'http://' + url : url;
 		}
+
+		Array.prototype.unique = function()
+		{
+			var u = {},	a = [];
+			for (var i = 0, l = this.length; i < l; ++i) {
+				if (u.hasOwnProperty(this[i])) {
+					continue;
+				}
+				a.push(this[i]);
+				u[this[i]] = 1;
+			}
+			return a;
+		}
+
 
 	}
 
